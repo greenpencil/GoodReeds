@@ -1,0 +1,206 @@
+<?php
+
+namespace ReviewBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Book
+ *
+ * @ORM\Table(name="book")
+ * @ORM\Entity(repositoryClass="ReviewBundle\Repository\BookRepository")
+ */
+class Book
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="blurb", type="text")
+     */
+    private $blurb;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ISBN", type="string", length=255, unique=true)
+     */
+    private $iSBN;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * 1 Book has Many Reviews.
+     * @ORM\OneToMany(targetEntity="Review", mappedBy="book")
+     */
+    private $reviews;
+
+    /**
+     * 1 Book has Many Ratings.
+     * @ORM\OneToMany(targetEntity="Rating", mappedBy="book")
+     */
+    private $ratings;
+
+    /**
+     * many books have the same author
+     * @ORM\ManyToOne(targetEntity="Author", inversedBy="books")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id")
+     */
+    private $author;
+
+    /**
+     * many books are in the same series
+     * @ORM\ManyToOne(targetEntity="Series", inversedBy="books")
+     * @ORM\JoinColumn(name="series_id", referencedColumnName="id")
+     */
+    private $series;
+
+    /**
+     * many books share a language
+     * @ORM\ManyToOne(targetEntity="Language", inversedBy="books")
+     * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
+     */
+    private $language;
+
+    /**
+     * Many Books have Many Images.
+     * @ORM\ManyToMany(targetEntity="Image", inversedBy="books")
+     * @ORM\JoinTable(name="books_images")
+     */
+    private $images;
+
+    /**
+     * Many Books have Many Genres.
+     * @ORM\ManyToMany(targetEntity="Genre", inversedBy="books")
+     * @ORM\JoinTable(name="books_genres")
+     */
+    private $genres;
+
+    public function __construct() {
+        $this->reviews = new ArrayCollection();
+        $this->ratings = new ArrayCollection();
+        $this->images = new ArrayCollection();
+        $this->genres = new ArrayCollection();
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * Set blurb
+     *
+     * @param string $blurb
+     * @return Book
+     */
+    public function setBlurb($blurb)
+    {
+        $this->blurb = $blurb;
+
+        return $this;
+    }
+
+    /**
+     * Get blurb
+     *
+     * @return string 
+     */
+    public function getBlurb()
+    {
+        return $this->blurb;
+    }
+
+    /**
+     * Set iSBN
+     *
+     * @param string $iSBN
+     * @return Book
+     */
+    public function setISBN($iSBN)
+    {
+        $this->iSBN = $iSBN;
+
+        return $this;
+    }
+
+    /**
+     * Get iSBN
+     *
+     * @return string 
+     */
+    public function getISBN()
+    {
+        return $this->iSBN;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Book
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Book
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+}

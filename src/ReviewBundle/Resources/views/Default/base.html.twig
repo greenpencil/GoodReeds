@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Home{% endblock %} - GoodReeds</title>
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    {% block stylesheets %}
+        {% stylesheets '@ReviewBundle/Resources/public/css/*'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+    {% endblock %}
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+
+</head>
+
+<body>
+<div class="app-bar bg-yellow fg-dark">
+    <div style="width:80%; margin:0 auto;">
+        <a class="app-bar-element  bg-hover-darkYellow" href=""><i class="fa fa-pagelines" aria-hidden="true"></i> GoodReeds</a>
+
+        <!--<ul class="app-bar-menu place-right">
+            <li><a href="" class=" bg-hover-darkYellow">Browse the Collection</a></li>
+            <li><a href="" class=" bg-hover-darkYellow">Curated Articles</a></li>
+            <li><a href="" class=" bg-hover-darkYellow">Browse Reviews</a></li>
+        </ul>-->
+        <ul class="app-bar-menu place-right">
+            <li><a href="" class=" bg-hover-darkYellow">Register / Login</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="padding20" style="width:80%; margin:0 auto;">
+
+    <div class="fg-white bg-green padding30 margin10 align-center call-to-action">
+        <h1>Welcome to GoodReeds</h1>
+        <p>Looking for something to do? Here are some suggestions</p>
+        <a class="button fg-black">Write a new review</a>
+        <a class="button fg-black">Browse our manuscripts</a>
+        <a class="button fg-black">Check out the articles</a>
+    </div>
+
+    <div class="grid">
+        <div class="row cells4">
+            <div class="cell colspan3 padding10">
+                {% block content %}{% endblock %}
+            </div>
+
+            <div class="cell padding10">
+                <h4 class="section-title bd-green">What's happening?</h4>
+                <p><b>New release</b> The Book of the Dead</p>
+                <p><b>Review</b> on The Voynich Manuscript "..good pictures a little bit hard to read"</p>
+                <p><b>Article</b> The best books of 2016</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer bg-yellow fg-dark" style="height:3rem;">
+    <div style="width:80%; margin:0 auto;">
+        <br/>
+        © 2011 mydomain.com All Rights Reserved | Created by <a href="http://www.kpf.io/">Katie Paxton-Fear</a>
+    </div>
+</div>
+
+{% block javascripts %}
+    {% javascripts '@ReviewBundle/Resources/public/js/*' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+
+</body>
+</html>

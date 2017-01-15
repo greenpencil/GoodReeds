@@ -1,0 +1,213 @@
+<?php
+
+namespace ReviewBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Rating
+ *
+ * @ORM\Table(name="rating")
+ * @ORM\Entity(repositoryClass="ReviewBundle\Repository\RatingRepository")
+ */
+class Rating
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="stars", type="integer")
+     */
+    private $stars;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="blurb", type="string", length=255)
+     */
+    private $blurb;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    private $updatedAt;
+
+    /**
+     * many ratings belong to 1 book
+     * @ORM\ManyToOne(targetEntity="Book", inversedBy="ratings")
+     * @ORM\JoinColumn(name="book_id", referencedColumnName="id")
+     */
+    private $book;
+
+    /**
+     * many ratings belong 1 user
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="ratings")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set stars
+     *
+     * @param integer $stars
+     * @return Rating
+     */
+    public function setStars($stars)
+    {
+        $this->stars = $stars;
+
+        return $this;
+    }
+
+    /**
+     * Get stars
+     *
+     * @return integer 
+     */
+    public function getStars()
+    {
+        return $this->stars;
+    }
+
+    /**
+     * Set blurb
+     *
+     * @param string $blurb
+     * @return Rating
+     */
+    public function setBlurb($blurb)
+    {
+        $this->blurb = $blurb;
+
+        return $this;
+    }
+
+    /**
+     * Get blurb
+     *
+     * @return string 
+     */
+    public function getBlurb()
+    {
+        return $this->blurb;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Rating
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Rating
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set book
+     *
+     * @param \ReviewBundle\Entity\Book $book
+     * @return Rating
+     */
+    public function setBook(\ReviewBundle\Entity\Book $book = null)
+    {
+        $this->book = $book;
+
+        return $this;
+    }
+
+    /**
+     * Get book
+     *
+     * @return \ReviewBundle\Entity\Book 
+     */
+    public function getBook()
+    {
+        return $this->book;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \ReviewBundle\Entity\User $user
+     * @return Rating
+     */
+    public function setUser(\ReviewBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \ReviewBundle\Entity\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

@@ -1,0 +1,3 @@
+review:
+    resource: "@ReviewBundle/Resources/config/routing.yml"
+    prefix:   /
